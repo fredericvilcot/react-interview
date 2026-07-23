@@ -1,0 +1,7 @@
+node_modules
+dist
+*.local
+.DS_Store
+
+# Interviewer-only: debrief (traps + grading + reference), never publish
+DEBRIEF.md
