@@ -11,6 +11,8 @@ et beaucoup à améliorer.
 
 ## Lancer le projet
 
+Sur StackBlitz, tout démarre automatiquement. En local :
+
 ```bash
 npm install
 npm run dev      # lance l'API (port 3001) et le front (port 5173)
@@ -37,20 +39,17 @@ server/    → API Express (favoris stockés dans server/favorites.json)
 
 ---
 
-## Ta mission
+## Comment ça se passe
 
-Reprends ce code comme s'il devait **vivre et grandir dans une équipe** :
+On fait l'exercice **ensemble, en live**. Ce qui nous intéresse, c'est ta **façon de
+raisonner** : pense à voix haute, pose des questions, modifie le code quand tu veux.
 
-1. **Comprends l'app** (front et back) et repère ce qui cloche.
-2. **Corrige** les problèmes qui te semblent prioritaires.
-3. **Propose une architecture** propre et maintenable — tu peux en refactorer une
-   partie, ou simplement la décrire.
-4. Tu **expliqueras tes choix à l'oral** au moment du debrief (rien à rédiger).
+1. **Découvre** l'app et le code (front et back), dis-nous ce que tu remarques.
+2. **Corrige** ce qui te semble prioritaire.
+3. Explique comment tu **organiserais** ce code pour qu'il vive dans une équipe — et
+   commence à le faire si tu as le temps.
 
-## Ce qu'on évalue
-
-> Tu n'es pas obligé de tout traiter. On veut voir comment tu **couvres ces
-> dimensions** et comment tu **priorises**.
+## Ce qu'on regarde
 
 - **Architecture** — découpage front / back, responsabilités, contrat d'API.
 - **Qualité du TypeScript** — des deux côtés.
@@ -60,10 +59,7 @@ Reprends ce code comme s'il devait **vivre et grandir dans une équipe** :
 
 ## Ce qu'on ne demande PAS
 
-- Pas de travail sur le **design / CSS** (le style est secondaire).
-- Pas besoin de **tout finir** : **priorise** et assume tes arbitrages.
+- Pas de travail sur le **design / CSS**.
+- Pas besoin de **tout finir** : on préfère te voir **prioriser** et expliquer tes choix.
 
----
-
-⏱️ Tu as **35 minutes**. On n'attend pas que tout soit fait : **priorise**, et ce qui
-nous intéresse c'est ta **façon de raisonner**. Bon courage 🚀
+Bon courage 🚀
