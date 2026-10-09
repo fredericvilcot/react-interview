@@ -65,5 +65,5 @@ Reprends ce code comme s'il devait **vivre et grandir dans une équipe** :
 
 ---
 
-⏱️ Tu as **45 minutes**. On n'attend pas que tout soit fait : **priorise**, et ce qui
+⏱️ Tu as **35 minutes**. On n'attend pas que tout soit fait : **priorise**, et ce qui
 nous intéresse c'est ta **façon de raisonner**. Bon courage 🚀

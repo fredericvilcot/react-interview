@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Pokemon } from './types'
 import { Dashboard } from './components/Dashboard'
-import { Detail } from './components/Detail'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -11,14 +10,13 @@ import { TYPE_COLORS, LEGENDARIES } from './data'
 import { useSortById, useSortByName } from './hooks'
 import { Star } from 'lucide-react'
 
-const LIMIT = 60
+const LIMIT = 30
 
 export default function App() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<'id' | 'name'>('id')
-  const [selected, setSelected] = useState<Pokemon | null>(null)
   const [favorites, setFavorites] = useState<string[]>([])
 
   async function load() {
@@ -106,15 +104,11 @@ export default function App() {
         {visible.map((p, index) => (
           <Card
             key={index}
-            className="cursor-pointer hover:border-primary transition-colors relative"
-            onClick={() => setSelected(p)}
+            className="relative"
           >
             <button
               className="absolute top-2 right-2 z-10"
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleFavorite(p.id)
-              }}
+              onClick={() => toggleFavorite(p.id)}
             >
               <Star
                 className={
@@ -149,8 +143,6 @@ export default function App() {
           </Card>
         ))}
       </div>
-
-      {selected && <Detail pokemon={selected} onClose={() => setSelected(null)} />}
     </div>
   )
 }
