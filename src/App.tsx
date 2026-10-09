@@ -19,14 +19,7 @@ export default function App() {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<'id' | 'name'>('id')
   const [selected, setSelected] = useState<Pokemon | null>(null)
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    try {
-      const parsed = JSON.parse(localStorage.getItem('favorites') ?? '[]')
-      return Array.isArray(parsed) ? parsed : []
-    } catch {
-      return []
-    }
-  })
+  const [favorites, setFavorites] = useState<string[]>([])
 
   async function load() {
     setLoading(true)
@@ -54,6 +47,9 @@ export default function App() {
 
   useEffect(() => {
     load()
+    fetch('/api/favorites')
+      .then((r) => r.json())
+      .then((data) => setFavorites(data))
   }, [])
 
   const filtered = pokemons.filter((p) => p.name.includes(search.toLowerCase()))
@@ -62,11 +58,12 @@ export default function App() {
   function toggleFavorite(id: string) {
     if (favorites.includes(id)) {
       favorites.splice(favorites.indexOf(id), 1)
+      fetch(`/api/favorites/${id}`, { method: 'DELETE' })
     } else {
       favorites.push(id)
+      fetch(`/api/favorites/${id}`, { method: 'POST' })
     }
     setFavorites(favorites)
-    localStorage.setItem('favorites', JSON.stringify(favorites))
   }
 
   return (

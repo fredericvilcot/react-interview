@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -6,24 +5,9 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog'
-import { Badge } from '@/components/ui/badge'
 
 export function Detail(props: any) {
   const pokemon = props.pokemon
-  const [info, setInfo] = useState<any>(null)
-
-  useEffect(() => {
-    let cancelled = false
-    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)
-      .then((r) => r.json())
-      .then((d) => {
-        if (!cancelled) setInfo(d)
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [pokemon])
-
   const total = pokemon.stats.reduce((acc: number, s: any) => acc + s.base_stat, 0)
 
   return (
@@ -54,17 +38,6 @@ export function Detail(props: any) {
               <span className="text-xs w-8 text-right">{s.base_stat}</span>
             </div>
           ))}
-        </div>
-
-        <div className="space-y-2">
-          <h4 className="font-semibold">Capacités</h4>
-          <div className="flex flex-wrap gap-1">
-            {info?.abilities?.map((a: any, i: number) => (
-              <Badge key={i} variant="secondary" className="capitalize">
-                {a.ability.name}
-              </Badge>
-            ))}
-          </div>
         </div>
       </DialogContent>
     </Dialog>
