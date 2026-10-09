@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Pokemon } from './types'
 import { Dashboard } from './components/Dashboard'
-import { Detail } from './components/Detail'
 import { Card, CardContent } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
@@ -11,22 +10,14 @@ import { TYPE_COLORS, LEGENDARIES } from './data'
 import { useSortById, useSortByName } from './hooks'
 import { Star } from 'lucide-react'
 
-const LIMIT = 60
+const LIMIT = 30
 
 export default function App() {
   const [pokemons, setPokemons] = useState<Pokemon[]>([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState<'id' | 'name'>('id')
-  const [selected, setSelected] = useState<Pokemon | null>(null)
-  const [favorites, setFavorites] = useState<string[]>(() => {
-    try {
-      const parsed = JSON.parse(localStorage.getItem('favorites') ?? '[]')
-      return Array.isArray(parsed) ? parsed : []
-    } catch {
-      return []
-    }
-  })
+  const [favorites, setFavorites] = useState<string[]>([])
 
   async function load() {
     setLoading(true)
@@ -54,6 +45,9 @@ export default function App() {
 
   useEffect(() => {
     load()
+    fetch('/api/favorites')
+      .then((r) => r.json())
+      .then((data) => setFavorites(data))
   }, [])
 
   const filtered = pokemons.filter((p) => p.name.includes(search.toLowerCase()))
@@ -62,11 +56,12 @@ export default function App() {
   function toggleFavorite(id: string) {
     if (favorites.includes(id)) {
       favorites.splice(favorites.indexOf(id), 1)
+      fetch(`/api/favorites/${id}`, { method: 'DELETE' })
     } else {
       favorites.push(id)
+      fetch(`/api/favorites/${id}`, { method: 'POST' })
     }
     setFavorites(favorites)
-    localStorage.setItem('favorites', JSON.stringify(favorites))
   }
 
   return (
@@ -109,15 +104,11 @@ export default function App() {
         {visible.map((p, index) => (
           <Card
             key={index}
-            className="cursor-pointer hover:border-primary transition-colors relative"
-            onClick={() => setSelected(p)}
+            className="relative"
           >
             <button
               className="absolute top-2 right-2 z-10"
-              onClick={(e) => {
-                e.stopPropagation()
-                toggleFavorite(p.id)
-              }}
+              onClick={() => toggleFavorite(p.id)}
             >
               <Star
                 className={
@@ -152,8 +143,6 @@ export default function App() {
           </Card>
         ))}
       </div>
-
-      {selected && <Detail pokemon={selected} onClose={() => setSelected(null)} />}
     </div>
   )
 }
