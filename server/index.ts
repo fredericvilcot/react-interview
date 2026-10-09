@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs'
 import path from 'path'
 
-const app = express()
+export const app = express()
 app.use(express.json())
 
 const FILE = path.join(process.cwd(), 'server/favorites.json')
@@ -29,8 +29,4 @@ app.delete('/api/favorites/:id', (req: any, res: any) => {
   favorites.splice(index, 1)
   fs.writeFileSync(FILE, JSON.stringify(favorites))
   res.json(favorites)
-})
-
-app.listen(3001, () => {
-  console.log('API listening on http://localhost:3001')
 })

@@ -15,7 +15,7 @@ Sur StackBlitz, tout démarre automatiquement. En local :
 
 ```bash
 npm install
-npm run dev      # lance l'API (port 3001) et le front (port 5173)
+npm run dev      # lance le front et l'API sur http://localhost:5173
 ```
 
 Vérifier les types :
@@ -30,6 +30,9 @@ Stack : Vite · React 18 · TypeScript · Tailwind · shadcn/ui · Express.
 src/       → front React
 server/    → API Express (favoris stockés dans server/favorites.json)
 ```
+
+En dev, l'API Express est servie par le serveur Vite (voir `vite.config.ts`) : front et
+API partagent le même port.
 
 | Méthode  | Route                 | Rôle                |
 | -------- | --------------------- | ------------------- |

@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -n api,web -c blue,green \"npm:dev:api\" \"npm:dev:web\"",
-    "dev:api": "nodemon --watch server --ext ts --exec vite-node server/index.ts",
-    "dev:web": "wait-on tcp:3001 && vite",
+    "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit && tsc -p tsconfig.server.json"
@@ -28,13 +26,9 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
-    "concurrently": "^9.2.5",
-    "nodemon": "^3.1.14",
     "postcss": "^8.4.40",
     "tailwindcss": "^3.4.7",
     "typescript": "^5.5.3",
-    "vite": "^5.3.4",
-    "vite-node": "^2.1.9",
-    "wait-on": "^8.0.5"
+    "vite": "^5.3.4"
   }
 }
