@@ -29,6 +29,7 @@ Stack : Vite · React 18 · TypeScript · Tailwind · shadcn/ui · Express.
 ```
 src/       → front React
 server/    → API Express (favoris stockés dans server/favorites.json)
+server-go/ → la même API, réécrite en Go (à lire et auditer)
 ```
 
 En dev, l'API Express est servie par le serveur Vite (voir `vite.config.ts`) : front et
@@ -39,6 +40,16 @@ API partagent le même port.
 | `GET`    | `/api/favorites`      | Liste des favoris   |
 | `POST`   | `/api/favorites/:id`  | Ajoute un favori    |
 | `DELETE` | `/api/favorites/:id`  | Retire un favori    |
+
+### Variante Go
+
+`server-go/` expose la même API en Go (stdlib uniquement, Go 1.22+). L'app tourne avec
+l'API Express ; la version Go est là pour être lue et auditée. Pour la lancer quand même,
+depuis la racine du dépôt :
+
+```bash
+go run ./server-go   # http://localhost:8080/api/favorites
+```
 
 ---
 
